@@ -3,18 +3,20 @@ import { createStore } from 'redux';
 const add = document.getElementById('add');
 const minus = document.getElementById('minus');
 const number = document.querySelector('span');
-number.innerText = 0;
 
+number.innerText = 0;
+const ADD = 'Add';
+const MINUS = 'Minus';
 const countModifier = (count = 0, action) => {
 	console.log(count, action);
-	if (action.type === 'Add') {
-		return (count = count + 1);
-	} else if (action.type === 'Minus') {
-		return (count = count - 1);
-	} else {
-		return count;
+	switch (action.type) {
+		case ADD:
+			return count + 1;
+		case MINUS:
+			return count - 1;
+		default:
+			return count;
 	}
-	// return count;
 };
 
 const countStore = createStore(countModifier);
